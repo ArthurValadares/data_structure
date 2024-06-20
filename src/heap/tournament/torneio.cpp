@@ -17,8 +17,6 @@ class Torneio{
         void copiaSubindo(int i);
         bool cheio();
         bool vazio();
-        int fatorComparacao{1};
-        int potenciaDois;
     public:
         Torneio(int numFolhas = 9);
         Torneio(Dado *arrDados, int tamanhoArr);
@@ -34,7 +32,6 @@ Torneio::Torneio(Dado *arrDados, int tamanhoArr){
 
     while(capacidade < tamanhoArr) // numero de possíveis pais é a primeira potência de 2 maior q o numero de dados - 1
         capacidade *= 2;
-    potenciaDois = capacidade;
 
     capacidade = capacidade - 1 + tamanhoArr; // numero de possiveis pais + numero de dados (folhas da heap)
 
@@ -83,20 +80,9 @@ int Torneio::filhoDireito(int i){
 
 void Torneio::arruma(){
 
-    int numPais{potenciaDois/2}, contador{0};
-
     // realiza o duelo entre os elementos
-    for(int i{indexDados - 1}; i>= 0; i--){
-
+    for(int i{indexDados - 1}; i>= 0; i--)
         copiaMaior(i);
-
-        contador++;
-        if(contador == numPais){
-            contador = 0;
-            numPais /= 2;
-            fatorComparacao = -1 * fatorComparacao;
-        }
-    }
 }
 
 void Torneio::copiaMaior(int i){
@@ -106,13 +92,12 @@ void Torneio::copiaMaior(int i){
 
     if(esq < capacidade){
 
-        if(dir < capacidade && heap[dir] != INVALIDO && (heap[dir] * fatorComparacao) > (heap[esq] * fatorComparacao))
+        if(dir < capacidade && heap[dir] > heap[esq])
             indexMaior = dir;
         else
             indexMaior = esq;
         
         heap[i] = heap[indexMaior];
-        
 
     }else{
         heap[i] = INVALIDO; // pai não possui filhos
@@ -166,18 +151,34 @@ void Torneio::imprime(){
 
 int main(){
 
-    int n;
-    std::cin >> n;
+    Torneio torneio;
+    Dado d;
+    char opcao;
 
-    int *arr = new int[n];
-    for(int i{0}; i<n; i++)
-        std::cin >> arr[i];
-
-    Torneio torneio(arr, n);
-
-    std::cout << torneio.campeao() << "\n";
-
-    delete[] arr;
+    do {
+        try {
+            std::cin >> opcao;
+            switch (opcao) {
+                case 'i': // inserir
+                    std::cin >> d;
+                    torneio.insere(d);
+                    break;
+                case 'e': // espiar raiz
+                    d = torneio.campeao();
+                    std::cout << d << "\n";
+                    break;
+                case 'p': // imprimir
+                    torneio.imprime();
+                    break;
+                case 'x': // sair
+                    break;
+                default:
+                    std::cout << "comando inválido\n";
+            }
+        } catch (std::runtime_error& e) {
+            std::cout << e.what() << "\n";
+        }
+    } while (opcao != 'x'); // finalizar execução
 
     return 0;
 }

@@ -81,7 +81,7 @@ std::ostream& operator << (std::ostream& saida, const MaxHeap& h) {
 }
 
 unsigned Indice(char tipo) {
-    // Funcao para converter tipo de pessoa na fila para indices no vetor de contadores.
+    // Funcao para converter tipo de pessoa na queue para indices no vetor de contadores.
     switch (tipo) {
         case 'P': return 0;
         case 'V': return 1;
@@ -130,7 +130,7 @@ int main() {
                 if (heap.Retirar(&pessoa))
                     cout << pessoa.senha << endl;
                 else
-                    cout << "ninguem na fila" << endl;
+                    cout << "ninguem na queue" << endl;
                 break;
             case 's': //sair do programa
                 break;

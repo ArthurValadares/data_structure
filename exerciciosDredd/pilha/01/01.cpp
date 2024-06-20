@@ -2,7 +2,7 @@
 
 typedef int Dado; // para facilitar a troca de int para outro tipo
  
-// pilha implementada em arranjo 
+// stack implementada em arranjo
 class pilhav {
     private:
         int capacidade;
@@ -15,8 +15,8 @@ class pilhav {
         void empilha(const Dado &valor);
         Dado desempilha();
         Dado espia(); // acessa elemento do topo, mas não retira
-        void depura(); // imprime os dados do vetor da pilha sem removê-los (desempilhar)
-        void info();  // imprime informações da pilha (tamanho e  posição do topo)
+        void depura(); // imprime os dados do vetor da stack sem removê-los (desempilhar)
+        void info();  // imprime informações da stack (tamanho e  posição do topo)
 };
 
 pilhav::pilhav(int cap){

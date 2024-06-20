@@ -5,7 +5,7 @@ typedef std::string Dado;
 
 class Noh{
 
-    //permitir acesso da fila aos atributos privados do Noh
+    //permitir acesso da queue aos atributos privados do Noh
     friend class FilaEncadeada;
 
     // noh armazena dado e ponteiro para o próximo

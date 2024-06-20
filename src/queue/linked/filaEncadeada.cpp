@@ -1,7 +1,7 @@
 #include <iostream>
 #include <stdexcept>
 
-typedef std::string Dado;
+typedef int Dado;
 
 class Noh{
 
@@ -98,34 +98,46 @@ Dado FilaEncadeada::espiarInicio(){
 int main(){
 
     FilaEncadeada fila;
-    int n;
-    Dado base{"1"};
-    Dado numA, numB;
+    Dado d;
+    char opcao;
 
-    std::cin >> n;
+    do{
 
-    std::cout << base << " ";
+        try{
 
-    for(int i{0}; i<(n/2 - 1); i++){
+            std::cin >> opcao;
 
-        numA = base + "0";
-        numB = base + "1";
+            switch(opcao){
+                case 'i': // enfileirar elemento
+                    std::cin >> d;
+                    fila.enfileira(d);
+                    break;
+                case 'r': // desenfileirar elemento
+                    d = fila.desenfileira();
+                    std::cout << d << "\n";
+                    break;
+                case 'l': // limpar tudo
+                    fila.limparTudo();
+                    break;
+                case 'e':
+                    d = fila.espiarInicio();
+                    std::cout << d << "\n";
+                    break;
+                case 't':
+                    std::cout << "tamanho: " << fila.getTamanho() << "\n";
+                    break;
+                case 'x':
+                    break;
+                default:
+                    std::cout << "opcao invalida\n";
+            }
 
-        std::cout << numA << " ";
-        std::cout << numB << " ";
 
-        fila.enfileira(numA);
-        fila.enfileira(numB);
+        }catch(std::runtime_error &err){
+            std::cout << err.what() << "\n";
+        }
 
-        base = fila.desenfileira();
-
-    }
-
-    if(n % 2){ // impar
-        std::cout << base + "0" << " ";
-        std::cout << base + "1" << "\n";
-    }else // par
-        std::cout << base + "0" << "\n";
+    }while(opcao != 'x');
 
     return 0;
 }

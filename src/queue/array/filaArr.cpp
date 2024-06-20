@@ -20,7 +20,6 @@ class FilaArr{
         unsigned int getTamanho();
         bool vazia();
         bool cheia();
-        void info();
 
 };
 
@@ -90,25 +89,11 @@ bool FilaArr::cheia(){
     return (tamanho == capacidade);
 }
 
-void FilaArr::info(){
-
-    std::cout << "tamanho=" << tamanho << " capacidade=" << capacidade << " inicio=" << indexInicio << " fim=" << indexFim << "\n";
-
-    for(int i{0}; i<tamanho; i++)
-        std::cout << dadoArr[(indexInicio + i)%capacidade] << " ";
-
-    std::cout << "\n";
-}
-
 int main(){
 
+    FilaArr fila;
     Dado d;
     char opcao;
-
-    int n;
-    std::cin >> n;
-
-    FilaArr fila(n);
 
     do{
 
@@ -117,18 +102,25 @@ int main(){
             std::cin >> opcao;
 
             switch(opcao){
-                case 'e': // enfileirar elemento
+                case 'i': // enfileirar elemento
                     std::cin >> d;
                     fila.enfileira(d);
                     break;
-                case 'd': // desenfileirar elemento
+                case 'r': // desenfileirar elemento
                     d = fila.desenfileira();
                     std::cout << d << "\n";
                     break;
-                case 'i':
-                    fila.info();
+                case 'l': // limpar tudo
+                    fila.limparTudo();
+                    break;
+                case 'e':
+                    d = fila.espiarInicio();
+                    std::cout << d << "\n";
                     break;
                 case 't':
+                    std::cout << "tamanho: " << fila.getTamanho() << "\n";
+                    break;
+                case 'x':
                     break;
                 default:
                     std::cout << "opcao invalida\n";
@@ -139,7 +131,7 @@ int main(){
             std::cout << err.what() << "\n";
         }
 
-    }while(opcao != 't');
+    }while(opcao != 'x');
 
     return 0;
 }

@@ -99,41 +99,46 @@ unsigned int PilhaEncadeada::getTamanho(){
 int main(){
 
     PilhaEncadeada pilha;
-    
-    std::string txt;
-    std::getline(std::cin, txt);
+    Dado d;
+    char opcao;
 
-    bool txtValido{true};
-    int i{0};
+    do{
 
-    while(txtValido && i < int(txt.length()) ){
+        try{
 
-         if(txt[i] == '(')
-            pilha.empilhar(i);
-        else if(txt[i] == ')'){
+            std::cin >> opcao;
 
-            if(pilha.vazia())
-                txtValido = false;
-            else
-                pilha.desempilhar();
+            switch(opcao){
+                case 'i': // empilhar elemento
+                    std::cin >> d;
+                    pilha.empilhar(d);
+                    break;
+                case 'r': // desempilhar elemento
+                    d = pilha.desempilhar();
+                    std::cout << d << "\n";
+                    break;
+                case 'l': // limpar tudo
+                    pilha.limparTudo();
+                    break;
+                case 'e':
+                    d = pilha.espiarTopo();
+                    std::cout << d << "\n";
+                    break;
+                case 't':
+                    std::cout << "tamanho: " << pilha.getTamanho() << "\n";
+                    break;
+                case 'x':
+                    break;
+                default:
+                    std::cout << "opcao invalida\n";
+            }
 
+
+        }catch(std::runtime_error &err){
+            std::cout << err.what() << "\n";
         }
 
-        i++;
-    }
-
-    if(txtValido){
-
-        if(pilha.vazia())
-            std::cout << "correto\n";
-        else
-            std::cout << pilha.espiarTopo() << "\n";
-
-    }else{
-
-        std::cout << (i - 1) << "\n";;
-
-    }
+    }while(opcao != 'x');
 
     return 0;
 }
