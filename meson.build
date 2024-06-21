@@ -11,6 +11,19 @@ data_structure = static_library(
     include_directories: inc,
 )
 
+# Adicionar IWYU como uma ferramenta de análise
+iwyu = find_program('include-what-you-use')
+
+# Adicionar uma regra para rodar IWYU em todos os arquivos de cabeçalho
+iwyu_target = custom_target(
+    'iwyu',
+    output: 'iwyu_report.txt',
+    command: [iwyu, '@INPUT@'],
+    input: headers,
+    capture: true,
+    depend_files: ['compile_commands.json']
+)
+
 pkg_mod = import('pkgconfig')
 pkg_mod.generate(
     libraries : data_structure,
