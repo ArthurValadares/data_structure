@@ -165,3 +165,7 @@ deactivate_conanrun.sh
 deactivate_conanrunenv-release-x86_64.sh
 
 build-release/
+CMakeFiles/
+.cmake/
+
+test_package/build
