@@ -1,1 +1,0 @@
-sources += files('DoublyLinkedNodeInterface.cpp', 'SinglyLinkedNodeInterface.cpp')
