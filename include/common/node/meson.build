@@ -1,1 +1,0 @@
-headers = files('AbstractNode.h', 'DoublyLinkedNode.h','SinglyLinkedNode.h')
