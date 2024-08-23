@@ -165,4 +165,3 @@ deactivate_conanrun.sh
 deactivate_conanrunenv-release-x86_64.sh
 
 build-release/
-test/bundle.config.json
