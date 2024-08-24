@@ -9,8 +9,6 @@ class DataStructureTestConan(ConanFile):
     settings = "os", "compiler", "build_type", "arch"
     generators = "CMakeDeps", "CMakeToolchain"
 
-    requires = "catch2/3.7.0"
-
     def requirements(self):
         self.requires(self.tested_reference_str)
 
@@ -24,5 +22,5 @@ class DataStructureTestConan(ConanFile):
 
     def test(self):
         if can_run(self):
-            cmd = os.path.join(self.cpp.build.bindir, "test")
+            cmd = os.path.join(self.cpp.build.bindir, "example")
             self.run(cmd, env="conanrun")

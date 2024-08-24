@@ -1,3 +1,5 @@
+import os
+
 from conan import ConanFile
 from conan.tools.cmake import CMakeToolchain, CMake, cmake_layout, CMakeDeps
 
@@ -11,7 +13,7 @@ class DataStructureRecipe(ConanFile):
     license = "<Put the package license here>"
     author = "<Put your name here> <And your email here>"
     url = "<Package recipe repository url here, for issues about the package>"
-    description = "<Description of DataStructure package here>"
+    description = "<Description of data-structure package here>"
     topics = ("<Put some tag here>", "<here>", "<and here>")
 
     # Binary configuration
@@ -21,6 +23,8 @@ class DataStructureRecipe(ConanFile):
 
     # Sources are located in the same place as this recipe, copy them to the recipe
     exports_sources = "CMakeLists.txt", "src/*", "include/*"
+
+    test_requires = "catch2/3.7.0"
 
     def config_options(self):
         if self.settings.os == "Windows":
@@ -48,5 +52,12 @@ class DataStructureRecipe(ConanFile):
         cmake = CMake(self)
         cmake.install()
 
+        if not self.conf.get("tools.build:skip_test", default=False):
+            test_folder = os.path.join("tests")
+            if self.settings.os == "Windows":
+                test_folder = os.path.join("tests", str(self.settings.build_type))
+            self.run(os.path.join(test_folder, "test_data_structure"))
+
     def package_info(self):
-        self.cpp_info.libs = ["data-structure"]
+        self.cpp_info.libs = ["data_structure"]
+

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.15)
-set(LIB_NAME data-structure)
+set(LIB_NAME data_structure)
 
 project(${LIB_NAME} CXX)
 
@@ -15,5 +15,8 @@ file(GLOB_RECURSE HEADERS ${INCLUDE_DIR}/*.h)
 add_library(${LIB_NAME} ${HEADERS} ${SOURCES})
 target_include_directories(${LIB_NAME} PUBLIC include)
 
-set_target_properties(${LIB_NAME} PROPERTIES PUBLIC_HEADER "${HEADERS}")
+if (NOT BUILD_TESTING STREQUAL OFF)
+    add_subdirectory(tests)
+endif()
+
 install(TARGETS ${LIB_NAME})

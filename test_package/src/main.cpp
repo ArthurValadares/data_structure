@@ -1,2 +1,3 @@
-#define CATCH_CONFIG_MAIN
-#include "catch2/catch_all.hpp"
+#include "../../include/DataStructure.h"
+
+int main(int argc, const char* argv[]) { return 0; }
