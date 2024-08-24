@@ -11,5 +11,5 @@ file(GLOB_RECURSE SOURCES ${SOURCE_DIR}/*.cpp)
 add_executable(${TEST_EXECUTABLE} ${SOURCES})
 target_link_libraries(${TEST_EXECUTABLE}
         Catch2::Catch2WithMain
-        data_structure
+        data-structure
 )
