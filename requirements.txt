@@ -1,6 +1,7 @@
 certifi==2024.7.4
 cfgv==3.4.0
 charset-normalizer==3.3.2
+click==8.1.7
 colorama==0.4.6
 conan==2.6.0
 distlib==0.3.8
